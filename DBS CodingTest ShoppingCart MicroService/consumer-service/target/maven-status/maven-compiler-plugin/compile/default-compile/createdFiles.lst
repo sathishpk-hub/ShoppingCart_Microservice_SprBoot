@@ -1,0 +1,9 @@
+com\consumer\service\ConsumerServiceApplication.class
+com\consumer\service\entity\ItemEntity.class
+com\consumer\service\entity\ProductEntityList.class
+com\consumer\service\serviceImpl\ConsumerService.class
+com\consumer\service\serviceImpl\ConsumerServiceImpl.class
+com\consumer\service\daoImpl\ProductDao.class
+com\consumer\service\entity\ProductEntity.class
+com\consumer\service\controller\ConsumerController.class
+com\consumer\service\daoImpl\ProductDaoImpl.class
