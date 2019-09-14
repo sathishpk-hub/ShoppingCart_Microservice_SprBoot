@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,20 +19,25 @@ import com.consumer.service.entity.ProductEntity;
 import com.consumer.service.serviceImpl.ConsumerService;
 
 @Controller
-@RequestMapping(value="consume")
+@RequestMapping(value = "consume")
 public class ConsumerController {
-	
+
 	/*
 	 * adding logger
 	 */
 	protected Logger logger = Logger.getLogger(ConsumerController.class.getName());
-	
-	
+
 	@Autowired
 	private ConsumerService consumerService;
 	
-	@RequestMapping(value="/productList",method=RequestMethod.GET)
-	//@RequestMapping(method=RequestMethod.GET)
+	@Autowired 
+	private JmsTemplate jmsTemplate;
+	
+	 
+	 
+
+	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	// @RequestMapping(method=RequestMethod.GET)
 	public String productList(ModelMap model) {
 		model.put("listProducts", consumerService.getAllProducts());
 		return "product/ListInventory";
@@ -42,29 +48,28 @@ public class ConsumerController {
 	 * model.addAttribute("ProductEntity", consumerService.getProduct(productId));
 	 * return "item/Selection"; }
 	 */
-	
-	
-	
+
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
 	public String productById(@PathVariable("productId") String productId, HttpSession session) {
+
 		List<ItemEntity> itemEntityList = new ArrayList<ItemEntity>();
-		
+
 		if (session.getAttribute("item") == null) {
 			itemEntityList = new ArrayList<ItemEntity>();
-			
+
 			ProductEntity productEntity = consumerService.getProductById(productId);
-			ItemEntity itemEntity = new ItemEntity(productEntity,1);
+			ItemEntity itemEntity = new ItemEntity(productEntity, 1);
 			itemEntityList.add(itemEntity);
-			
+
 			session.setAttribute("item", itemEntityList);
 		} else {
 			itemEntityList = (List<ItemEntity>) session.getAttribute("item");
-			
-			//verify whether item is already exist or not
+
+			// verify whether item is already exist or not
 			int index = this.ifProductExists(productId, itemEntityList);
 			if (index == -1) {
 				ProductEntity productEntity = consumerService.getProductById(productId);
-				ItemEntity itemEntity = new ItemEntity(productEntity,1);
+				ItemEntity itemEntity = new ItemEntity(productEntity, 1);
 				itemEntityList.add(itemEntity);
 			} else {
 				int quantity = itemEntityList.get(index).getProductQuantity() + 1;
@@ -74,8 +79,19 @@ public class ConsumerController {
 		}
 		return "item/Selection";
 	}
-	
-	
+
+	/*
+	 * Adding JMS Part, pushing message into Queue
+	 */
+	/*
+	 * private void pushMessageIntoQueue(String QueueName, ProductEntity
+	 * productEntity) { // Adding JMS Part, pushing message into Queue // Post
+	 * message to the message queue named "OrderTransactionQueue"
+	 * jmsTemplate.convertAndSend("OrderQueue", productEntity);
+	 * System.out.println("### Message Successfully Pushed into Queue ###");
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/removeProduct/{productId}", method = RequestMethod.GET)
 	public String removeProdById(@PathVariable("productId") String productId, HttpSession session) {
@@ -85,12 +101,7 @@ public class ConsumerController {
 		session.setAttribute("item", itemEntityList);
 		return "item/Selection";
 	}
-	
-	
-	
-	
-	
-	
+
 	private int ifProductExists(String id, List<ItemEntity> itemEntityList) {
 		for (int i = 0; i < itemEntityList.size(); i++) {
 			if (itemEntityList.get(i).getProduct().getProductId().equalsIgnoreCase(id)) {
@@ -99,7 +110,5 @@ public class ConsumerController {
 		}
 		return -1;
 	}
-	
-	
 
 }
