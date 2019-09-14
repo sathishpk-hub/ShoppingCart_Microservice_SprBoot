@@ -8,5 +8,5 @@ public interface ProductDao {
 	
 	List<ProductEntity> getAllProductEntities();
 	
-	ProductEntity getProductById(String productId);
+	ProductEntity getProductById(Long productId);
 }

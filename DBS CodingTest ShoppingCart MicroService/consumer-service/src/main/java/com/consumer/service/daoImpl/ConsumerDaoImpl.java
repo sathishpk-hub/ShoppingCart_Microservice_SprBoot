@@ -48,7 +48,7 @@ public class ConsumerDaoImpl implements ConsumerDao{
 	 */
 	
 	@Override
-	public ProductEntity getProductById(String productId) {
+	public ProductEntity getProductById(Long productId) {
 		ProductEntity productEntity = restTemplate.getForObject(serviceUrl+"/products/"+productId, ProductEntity.class);
 		System.out.println("productEntity.getProductName() = "+productEntity.getProductName());
 		return productEntity;
