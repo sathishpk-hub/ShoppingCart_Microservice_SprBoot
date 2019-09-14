@@ -2,6 +2,15 @@ package com.consumer.service.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "product")
 public class ProductEntity implements Serializable {
 	
 	/**
@@ -9,7 +18,12 @@ public class ProductEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String productId;
+	//primary key auto generated
+	@Id
+	@Column (name = "product_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long productId;
+	
 	private String productName;
 	private String productPhoto;
 	private Double productPrice;
@@ -19,7 +33,7 @@ public class ProductEntity implements Serializable {
 		super();
 	}
 
-	public ProductEntity(String productId, String productName, String productPhoto, Double productPrice) {
+	public ProductEntity(Long productId, String productName, String productPhoto, Double productPrice) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -27,10 +41,10 @@ public class ProductEntity implements Serializable {
 		this.productPrice = productPrice;
 	}
 	
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

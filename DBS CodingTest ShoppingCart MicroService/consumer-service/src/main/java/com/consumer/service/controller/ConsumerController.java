@@ -50,7 +50,7 @@ public class ConsumerController {
 	 */
 
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
-	public String productById(@PathVariable("productId") String productId, HttpSession session) {
+	public String productById(@PathVariable("productId") Long productId, HttpSession session) {
 
 		List<ItemEntity> itemEntityList = new ArrayList<ItemEntity>();
 
@@ -94,7 +94,7 @@ public class ConsumerController {
 	 */
 
 	@RequestMapping(value = "/removeProduct/{productId}", method = RequestMethod.GET)
-	public String removeProdById(@PathVariable("productId") String productId, HttpSession session) {
+	public String removeProdById(@PathVariable("productId") Long productId, HttpSession session) {
 		List<ItemEntity> itemEntityList = (List<ItemEntity>) session.getAttribute("item");
 		int index = this.ifProductExists(productId, itemEntityList);
 		itemEntityList.remove(index);
@@ -102,9 +102,9 @@ public class ConsumerController {
 		return "item/Selection";
 	}
 
-	private int ifProductExists(String id, List<ItemEntity> itemEntityList) {
+	private int ifProductExists(Long id, List<ItemEntity> itemEntityList) {
 		for (int i = 0; i < itemEntityList.size(); i++) {
-			if (itemEntityList.get(i).getProduct().getProductId().equalsIgnoreCase(id)) {
+			if (itemEntityList.get(i).getProduct().getProductId().equals(id)) {
 				return i;
 			}
 		}

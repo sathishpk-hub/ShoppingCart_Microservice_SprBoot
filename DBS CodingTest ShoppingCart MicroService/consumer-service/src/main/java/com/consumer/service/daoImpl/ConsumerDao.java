@@ -8,5 +8,5 @@ public interface ConsumerDao {
 	
 	List<ProductEntity> getAllProducts();
 	
-	ProductEntity getProductById(String productId);
+	ProductEntity getProductById(Long productId);
 }

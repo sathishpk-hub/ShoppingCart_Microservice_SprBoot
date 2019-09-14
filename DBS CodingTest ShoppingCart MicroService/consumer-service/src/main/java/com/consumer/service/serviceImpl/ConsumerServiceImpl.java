@@ -21,7 +21,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 	}
 
 	@Override
-	public ProductEntity getProductById(String productId) {
+	public ProductEntity getProductById(Long productId) {
 		return consumerDao.getProductById(productId);
 	}
 

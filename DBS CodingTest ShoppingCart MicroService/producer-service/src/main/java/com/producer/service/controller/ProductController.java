@@ -52,7 +52,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/products/{productId}")
-	public ProductEntity productById(@PathVariable("productId") String productId) {
+	public ProductEntity productById(@PathVariable("productId") Long productId) {
 		logger.info("producer-microservice productById() invoked");
 		ProductEntity productEntity = productService.getProductById(productId);
 		logger.info("producer-microservice productById() found: " + productEntity);
@@ -110,9 +110,9 @@ public class ProductController {
 	}
 	
 	
-	private int ifProductExists(String id, List<ItemEntity> itemEntityList) {
+	private int ifProductExists(Long id, List<ItemEntity> itemEntityList) {
 		for (int i = 0; i < itemEntityList.size(); i++) {
-			if (itemEntityList.get(i).getProduct().getProductId().equalsIgnoreCase(id)) {
+			if (itemEntityList.get(i).getProduct().getProductId().equals(id)) {
 				return i;
 			}
 		}
@@ -123,7 +123,7 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/products1/{productId}", method = RequestMethod.GET)
-	public String productById(@PathVariable("productId") String productId, HttpSession session) {
+	public String productById(@PathVariable("productId") Long productId, HttpSession session) {
 		List<ItemEntity> itemEntityList = new ArrayList<ItemEntity>();
 		
 		if (session.getAttribute("item") == null) {
@@ -153,7 +153,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/products2/{productId}")
-	public ProductEntity productById1(@PathVariable("productId") String productId) {
+	public ProductEntity productById1(@PathVariable("productId") Long productId) {
 		logger.info("producer-microservice productById() invoked");
 		ProductEntity productEntity = productService.getProductById(productId);
 		logger.info("producer-microservice productById() found: " + productEntity);

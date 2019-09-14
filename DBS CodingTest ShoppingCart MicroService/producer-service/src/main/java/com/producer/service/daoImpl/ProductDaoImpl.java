@@ -19,9 +19,9 @@ public class ProductDaoImpl implements ProductDao{
 		productList = new ArrayList<ProductEntity>();
 
 		//public ProductEntity(String productId, String productName, String productPhoto, Double productPrice) {
-		ProductEntity iphone = new ProductEntity("1","Apple IPhone 8 plus","iphone_8_plus.png", 1990D);
-		ProductEntity samsung = new ProductEntity("2","Samsung Note 10","samsung_note_10.jpg", 1700D);
-		ProductEntity huawei = new ProductEntity("3","Huawei P30 Pro","huawei.jpg", 1500D);
+		ProductEntity iphone = new ProductEntity(1L,"Apple IPhone 8 plus","iphone_8_plus.png", 1990D);
+		ProductEntity samsung = new ProductEntity(2L,"Samsung Note 10","samsung_note_10.jpg", 1700D);
+		ProductEntity huawei = new ProductEntity(3L,"Huawei P30 Pro","huawei.jpg", 1500D);
 		
 		productList.add(iphone);
 		productList.add(samsung);
@@ -35,9 +35,9 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public ProductEntity getProductById(String productId) {
+	public ProductEntity getProductById(Long productId) {
 		for(ProductEntity productEntity: this.productList) {
-			if(productEntity.getProductId().equalsIgnoreCase(productId)) {
+			if(productEntity.getProductId().equals(productId)) {
 				return productEntity;
 			}
 		}
