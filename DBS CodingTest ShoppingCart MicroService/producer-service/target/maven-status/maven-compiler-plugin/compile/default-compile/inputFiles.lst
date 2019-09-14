@@ -4,5 +4,6 @@ D:\STS_WS\producer-service\src\main\java\com\producer\service\serviceImpl\Produc
 D:\STS_WS\producer-service\src\main\java\com\producer\service\serviceImpl\ProductServiceImpl.java
 D:\STS_WS\producer-service\src\main\java\com\producer\service\daoImpl\ProductDaoImpl.java
 D:\STS_WS\producer-service\src\main\java\com\producer\service\entity\ProductEntity.java
+D:\STS_WS\producer-service\src\main\java\com\producer\service\listener\JmsConfig.java
 D:\STS_WS\producer-service\src\main\java\com\producer\service\ProducerServiceApplication.java
 D:\STS_WS\producer-service\src\main\java\com\producer\service\daoImpl\ProductDao.java
