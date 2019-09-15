@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.producer.service.ProducerServiceApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.223 sec - in com.producer.service.ProducerServiceApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.973 sec - in com.producer.service.ProducerServiceApplicationTests
