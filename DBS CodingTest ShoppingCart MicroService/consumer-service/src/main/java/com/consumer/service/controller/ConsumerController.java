@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +29,6 @@ public class ConsumerController {
 	@Autowired
 	private ConsumerService consumerService;
 	
-	@Autowired 
-	private JmsTemplate jmsTemplate;
-	
-	 
-	 
-
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
 	// @RequestMapping(method=RequestMethod.GET)
 	public String productList(ModelMap model) {
